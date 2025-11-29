@@ -48,5 +48,11 @@
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+
+        <div class="flex items-center justify-center mt-4">
+            <x-google-button href="{{ route('auth.google.redirect') }}" class="ms-1">
+                {{ __('Sign in with Google') }}
+            </x-google-button>
+        </div>
     </form>
 </x-guest-layout>

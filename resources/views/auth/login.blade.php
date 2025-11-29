@@ -39,9 +39,15 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-2">
                 {{ __('Log in') }}
             </x-primary-button>
+        </div>
+
+        <div class="flex items-center justify-center mt-4">
+            <x-google-button href="{{ route('auth.google.redirect') }}" class="ms-1">
+                {{ __('Sign in with Google') }}
+            </x-google-button>
         </div>
     </form>
 </x-guest-layout>
