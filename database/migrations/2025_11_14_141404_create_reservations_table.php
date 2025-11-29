@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->char('gender', 2);
+            $table->string('address');
+            $table->string('phone_number');
+            $table->date('date_of_entry');
+            $table->date('date_of_exit');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
