@@ -7,12 +7,16 @@
     @vite('resources/css/app.css')
 </head>
 <body class="max-h-screen grid-[1fr_auto_1fr]">
-    <header class="">
+    <header class="flex justify-between">
         <h1 class="text-3xl font-bold underline">Header</h1>
         <nav class="">
-            <ul>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+            <ul class="flex gap-2">
+                <li><a href="{{ route('auth.google.redirect') }}" class="btn bg-blue-100 shadow-sm border rounded-md text-blue-900">
+                    Login
+                </a></li>
+                <li><a href="/register" class="btn bg-blue-100 shadow-sm border rounded-md text-green-900">
+                    Register
+                </a></li>
             </ul>
         </nav>
     </header>
