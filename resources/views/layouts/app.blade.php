@@ -13,12 +13,6 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <style>
-            table, td, th, tr {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

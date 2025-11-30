@@ -28,11 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->email == "contoh@mail.com") {
-            return redirect()->intended(route('dashboard', absolute: false));
-        } else {
-            return redirect()->intended(route('client', absolute: false));
-        }
+        return redirect()->intended(route('reservation.client', absolute: false));
     }
 
     /**

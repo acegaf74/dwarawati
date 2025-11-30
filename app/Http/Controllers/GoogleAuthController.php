@@ -50,10 +50,6 @@ class GoogleAuthController extends Controller
         }
 
         // Redirect the user to the dashboard or any other secure page
-        if ($user->email == "mzidqiassegaf@gmail.com"){
-            return redirect('dashboard');
-        } else {
-            return redirect('client');
-        }
+        return redirect()->intended(route('reservation.admin', absolute: false));
     }
 }

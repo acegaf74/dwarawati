@@ -45,10 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         
-        if ($user->email == "contoh@mail.com"){
-            return redirect(route('dashboard', absolute: false));    
-        } else {
-            return redirect(route('client', absolute: false));
-        }
+        return redirect(route('reservation.client', absolute: false));
     }
 }

@@ -13,12 +13,12 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::paginate(10);
-        if (request()->routeIs('dashboard')){
-            return view('dashboard', [
+        if (request()->routeIs('reservation.admin')){
+            return view('reservation.admin', [
                 'reservations' => $reservations
             ]);
         } else {
-            return view('client');
+            return view('reservation.client');
         }
     }
 
@@ -27,7 +27,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
