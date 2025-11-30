@@ -12,7 +12,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::get();
+        $reservations = Reservation::paginate(10);
         if (request()->routeIs('dashboard')){
             return view('dashboard', [
                 'reservations' => $reservations
