@@ -50,6 +50,10 @@ class GoogleAuthController extends Controller
         }
 
         // Redirect the user to the dashboard or any other secure page
-        return redirect('/dashboard');
+        if ($user->email == "mzidqiassegaf@gmail.com"){
+            return redirect('dashboard');
+        } else {
+            return redirect('client');
+        }
     }
 }

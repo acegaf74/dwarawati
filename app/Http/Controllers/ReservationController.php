@@ -13,9 +13,13 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::get();
-        return view('dashboard', [
-            'reservations' => $reservations
-        ]);
+        if (request()->routeIs('dashboard')){
+            return view('dashboard', [
+                'reservations' => $reservations
+            ]);
+        } else {
+            return view('client');
+        }
     }
 
     /**

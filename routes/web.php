@@ -12,6 +12,9 @@ Route::get('/', function () {
 Route::get('/dashboard', [ReservationController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/client', [ReservationController::class, 'index'])
+->middleware(['auth', 'verified'])->name('client');
+
 // Route to redirect to Google's OAuth page
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 
