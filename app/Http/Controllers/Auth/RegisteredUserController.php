@@ -45,6 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         
-        return redirect(route('reservation.client', absolute: false));
+        return redirect(route('reservation.admin', absolute: false));
     }
 }

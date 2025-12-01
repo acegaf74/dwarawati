@@ -6,15 +6,16 @@ use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 
+
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/', [ReservationController::class, 'index'])
         ->name('reservation.client');
         
     Route::get('/admin', [ReservationController::class, 'index'])
-        ->name('reservation.admin')
-        ->middleware([isAdmin::class]);
+        ->middleware([isAdmin::class])
+        ->name('reservation.admin');
 
-    Route::post('/reservation/store', [ReservationController::class, 'store'])
+    Route::post('/store', [ReservationController::class, 'store'])
         ->name('reservation.store');
 });
 

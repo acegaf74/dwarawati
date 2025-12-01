@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
@@ -15,15 +14,12 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::paginate(10);
-        if (request()->routeIs('reservation.admin')) {
+        if (Auth::user()->isAdmin){
             return view('reservation.admin', [
                 'reservations' => $reservations
-            ]);    
-        } else {
-            return view('reservation.client', [
-                'reservations' => $reservations
-            ]);
+            ]); 
         }
+        return view('reservation.client');
     }
 
     /**
@@ -58,7 +54,7 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reservation $reservation)
+    public function show(string $id)
     {
         //
     }
@@ -66,7 +62,7 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservation $reservation)
+    public function edit(string $id)
     {
         //
     }
@@ -74,7 +70,7 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -82,7 +78,7 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(string $id)
     {
         //
     }
