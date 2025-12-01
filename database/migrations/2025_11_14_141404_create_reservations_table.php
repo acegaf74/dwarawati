@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->char('gender', 1);
-            $table->string('address');
+            $table->longText('address');
             $table->string('phone_number');
             $table->date('date_of_entry');
             $table->date('date_of_exit');

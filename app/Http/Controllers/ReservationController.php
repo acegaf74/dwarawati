@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -13,12 +15,14 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::paginate(10);
-        if (request()->routeIs('reservation.admin')){
+        if (request()->routeIs('reservation.admin')) {
             return view('reservation.admin', [
                 'reservations' => $reservations
-            ]);
+            ]);    
         } else {
-            return view('reservation.client');
+            return view('reservation.client', [
+                'reservations' => $reservations
+            ]);
         }
     }
 
@@ -27,7 +31,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        return view('create');
+        //
     }
 
     /**
@@ -35,7 +39,20 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservation = $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'date_of_entry' => 'required',
+            'date_of_exit' => 'required'
+        ]);
+
+        $reservation['user_id'] = Auth::id();
+        
+        Reservation::create($reservation);
+
+        return redirect()->route('reservation.client');
     }
 
     /**

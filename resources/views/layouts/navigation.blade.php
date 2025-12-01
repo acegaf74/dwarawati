@@ -12,13 +12,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex gap-2">
-                    @if (request()->routeIs('reservation.client'))
+                    @if (Auth::user()->isAdmin)
+                        <x-nav-link :href="route('reservation.admin')" :active="request()->routeIs('reservation.admin')">
+                            {{ __('Admin') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('reservation.client')" :active="request()->routeIs('reservation.client')">
                             {{ __('Client') }}
                         </x-nav-link>
-                    @elseif (request()->routeIs('reservation.admin'))
-                        <x-nav-link :href="route('reservation.admin')" :active="request()->routeIs('reservation.admin')">
-                            {{ __('Admin') }}
+                    @elseif (request()->routeIs('reservation.client'))
+                        <x-nav-link :href="route('reservation.client')" :active="request()->routeIs('reservation.client')">
+                            {{ __('Client') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -73,9 +76,15 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('reservation.admin')" :active="request()->routeIs('reservation.admin')">
-                {{ __('Admin') }}
-            </x-responsive-nav-link>
+            @if (request()->routeIs('reservation.client'))
+                <x-responsive-nav-link :href="route('reservation.client')" :active="request()->routeIs('reservation.client')">
+                    {{ __('Client') }}
+                </x-responsive-nav-link>
+            @elseif (request()->routeIs('reservation.admin'))
+                <x-responsive-nav-link :href="route('reservation.admin')" :active="request()->routeIs('reservation.admin')">
+                    {{ __('Admin') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

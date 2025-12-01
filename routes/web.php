@@ -4,12 +4,19 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\isAdmin;
 
-Route::get('/', [ReservationController::class, 'index'])
-->middleware(['auth', 'verified'])->name('reservation.client');
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/', [ReservationController::class, 'index'])
+        ->name('reservation.client');
+        
+    Route::get('/admin', [ReservationController::class, 'index'])
+        ->name('reservation.admin')
+        ->middleware([isAdmin::class]);
 
-Route::get('/admin', [ReservationController::class, 'index'])
-->middleware(['auth', 'verified'])->name('reservation.admin');
+    Route::post('/reservation/store', [ReservationController::class, 'store'])
+        ->name('reservation.store');
+});
 
 // Route to redirect to Google's OAuth page
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
