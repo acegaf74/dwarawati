@@ -13,13 +13,19 @@ class ReservationController extends Controller
      */
     public function index()
     {
+
         $reservations = Reservation::paginate(10);
-        if (Auth::user()->isAdmin){
+        $max = 50;
+        if (Auth::user()->isAdmin && request()->routeIs('reservation.admin')){
             return view('reservation.admin', [
-                'reservations' => $reservations
+                'reservations' => $reservations,
+                'max' => $max
             ]); 
         }
-        return view('reservation.client');
+        return view('reservation.client', [
+                'reservations' => $reservations,
+                'max' => $max
+            ]);
     }
 
     /**

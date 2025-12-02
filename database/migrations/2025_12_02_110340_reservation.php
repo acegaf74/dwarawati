@@ -13,13 +13,24 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('leader_name');
             $table->char('gender', 1);
             $table->longText('address');
             $table->string('phone_number');
+            $table->tinyInteger('pax');
             $table->date('date_of_entry');
             $table->date('date_of_exit');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('actual_date_of_exit')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->enum('type', ['TRANSIT', 'DIRECT'])->default('TRANSIT');
+            $table->foreignId('slot_id')->nullable()->constrained()->onDelete('cascade');
+            $table->enum('status', [
+                'UNPAID', 
+                'PAID_VERIFYING', 
+                'CONFIRMED',
+                'CANCELLED',
+                'EXPIRED'
+            ])->default('UNPAID');
             $table->timestamps();
         });
     }

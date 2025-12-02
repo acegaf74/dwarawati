@@ -3,12 +3,18 @@
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SlotController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 
+Route::get('/', [SlotController::class, 'index'])
+    ->name('welcome');
+
+Route::post('/search', [SlotController::class, 'search'])
+    ->name('search');
 
 Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/', [ReservationController::class, 'index'])
+    Route::get('/client', [ReservationController::class, 'index'])
         ->name('reservation.client');
         
     Route::get('/admin', [ReservationController::class, 'index'])

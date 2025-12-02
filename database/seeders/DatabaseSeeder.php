@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Reservation;
+use App\Models\Slot;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Reservation::factory(10)->create();
+        // Reservation::factory(10)->create();
+        Slot::factory(3)->create();
     }
 }
